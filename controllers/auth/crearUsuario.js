@@ -1,10 +1,37 @@
 const { response } = require('express');
+const bycript = require('bcryptjs');
 
-const crearUsuario = ( req, res = response ) => {
+const User = require('../../models/User');
 
-    res.json({
+const crearUsuario = async ( req, res = response ) => {
+
+    const { email, password } = req.body;
+
+    let user = await User.findOne({ email });
+
+    if ( user ) {
+
+        return res.status( 400 ).json({
+            ok: false,
+            msg: 'Ya existe un usuario con ese correo'
+        })
+
+    }
+
+    user = new User( req.body );
+
+    const salt = bycript.genSaltSync();
+    user.password = bycript.hashSync( password, salt );
+
+    const userData = await user.save();
+
+    res.status( 201 ).json({
         ok: true,
-        msg: 'Registro de sesion'
+        msg: 'Usuario registrado con exito',
+        data: {
+            uid: userData.id,
+            name: userData.name
+        }
     })
 }
 

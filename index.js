@@ -1,12 +1,15 @@
 require('dotenv').config();
 
 const express = require('express');
+const mongoConnection = require('./db/config');
 
 const authRoutes = require('./routes/auth')
 
 const port = process.env.PORT;
 
 const app = express();
+
+mongoConnection();
 
 // MIDDELWARES
 

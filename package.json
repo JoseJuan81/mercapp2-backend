@@ -10,8 +10,10 @@
   "author": "josejuan81",
   "license": "MIT",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
-    "express-validator": "^6.12.2"
+    "express-validator": "^6.12.2",
+    "mongoose": "^6.0.8"
   }
 }

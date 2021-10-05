@@ -22,7 +22,7 @@
 
  router.post( '/new', [
      check( 'name', 'El nombre es obligatorio' ).not().isEmpty(),
-     check( 'lastname', 'El apellido es obligatorio' ).not().isEmpty(),
+     check( 'email', 'El correo es incorrecto' ).isEmail(),
      check( 'password', 'La contrasena debe tener al menos 6 caracteres' ).isLength({ min: 6 }),
      fieldsValidator
  ], crearUsuario );
