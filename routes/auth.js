@@ -11,6 +11,7 @@
  const tokenRenew = require('../controllers/auth/tokenRenew');
 
  const fieldsValidator = require('../middlewares/fieldsValidator');
+const validatorToken = require('../middlewares/tokenValidator');
 
  const router = Router();
 
@@ -27,6 +28,8 @@
      fieldsValidator
  ], crearUsuario );
 
- router.get( '/renew', tokenRenew );
+ router.get( '/renew',[
+    validatorToken
+ ], tokenRenew );
 
  module.exports = router;

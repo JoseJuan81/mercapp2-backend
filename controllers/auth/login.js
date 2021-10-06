@@ -2,6 +2,7 @@ const { response } = require('express');
 const bycript = require('bcryptjs');
 
 const User = require('../../models/User');
+const tokenGenerator = require('../../helpers/jwt');
 
 const login = async ( req, res = response ) => {
     
@@ -29,13 +30,16 @@ const login = async ( req, res = response ) => {
             
         }
 
+        const token = await tokenGenerator( user.id, user.name );
+
         return res.status( 200 ).json({
             ok: true,
             msg: 'Inicio de sesion exitoso',
             data: {
                 name: user.name,
                 email: user.email,
-                uid: user.id
+                uid: user.id,
+                token
             }
         })
 

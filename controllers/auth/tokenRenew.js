@@ -1,11 +1,14 @@
 const { response } = require('express');
+const tokenGenerator = require('../../helpers/jwt');
 
 
-const tokenRenew = ( req, res = response ) => {
+const tokenRenew = async ( req, res = response ) => {
+
+    const token = await tokenGenerator( req.uid, req.name );
 
     res.json({
         ok: true,
-        msg: 'Renovar token de usuario'
+        token
     })
 }
 module.exports = tokenRenew;

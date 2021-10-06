@@ -2,6 +2,7 @@ const { response } = require('express');
 const bycript = require('bcryptjs');
 
 const User = require('../../models/User');
+const tokenGenerator = require('../../helpers/jwt');
 
 const crearUsuario = async ( req, res = response ) => {
 
@@ -25,12 +26,15 @@ const crearUsuario = async ( req, res = response ) => {
 
     const userData = await user.save();
 
+    const token = await tokenGenerator( userData.id, userData.name );
+
     res.status( 201 ).json({
         ok: true,
         msg: 'Usuario registrado con exito',
         data: {
             uid: userData.id,
-            name: userData.name
+            name: userData.name,
+            token
         }
     })
 }
