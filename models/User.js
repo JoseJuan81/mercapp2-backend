@@ -14,6 +14,13 @@ const UserSchema = mongoose.Schema({
         type: String,
         required: true
     }
+}, { timestamps: true });
+
+UserSchema.method('toJSON', function() {
+    const { __v, _id, ...rest } = this.toObject();
+    rest.id = _id;
+
+    return rest;
 })
 
 module.exports = mongoose.model( 'users', UserSchema );
