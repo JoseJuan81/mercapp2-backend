@@ -30,5 +30,5 @@ app.use( '/api/purchases', purchaseRoutes );
 
 const port = process.env.PORT;
 app.listen( port, () => {
-    console.log(`Servidor escuchando por el puerto ${ port }`)
+    console.log('\x1b[36m%s\x1b[0m','Servidor escuchando por el puerto', port)
 })

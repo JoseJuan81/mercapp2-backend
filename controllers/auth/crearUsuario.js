@@ -34,6 +34,7 @@ const crearUsuario = async ( req, res = response ) => {
         data: {
             uid: userData.id,
             name: userData.name,
+            email: userData.email,
             token
         }
     })
