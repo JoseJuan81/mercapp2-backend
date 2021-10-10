@@ -1,5 +1,11 @@
 const jwt = require('jsonwebtoken');
 
+/**
+ * 
+ * @param {string} uid 
+ * @param {string} userName 
+ * @param {string} email 
+ */
 const tokenGenerator = ( uid, userName, email ) => {
 
     return new Promise( (resolve, reject ) => {
@@ -7,7 +13,6 @@ const tokenGenerator = ( uid, userName, email ) => {
         jwt.sign(
             { uid, userName, email },
             process.env.TOKEN_SECRET,
-            { expiresIn: '2h' },
             ( err, token ) => {
 
                 if ( err ) {
