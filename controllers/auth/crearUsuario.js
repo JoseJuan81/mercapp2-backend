@@ -26,7 +26,7 @@ const crearUsuario = async ( req, res = response ) => {
 
     const userData = await user.save();
 
-    const token = await tokenGenerator( userData.id, userData.name );
+    const token = await tokenGenerator( userData.id, userData.name, email );
 
     res.status( 201 ).json({
         ok: true,

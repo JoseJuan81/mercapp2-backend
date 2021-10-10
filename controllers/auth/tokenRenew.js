@@ -4,11 +4,16 @@ const tokenGenerator = require('../../helpers/jwt');
 
 const tokenRenew = async ( req, res = response ) => {
 
-    const token = await tokenGenerator( req.uid, req.name );
+    const { name, uid } = req;
+    const token = await tokenGenerator( uid, name );
 
     res.json({
         ok: true,
-        token
+        data: {
+            name,
+            uid,
+            token
+        }
     })
 }
 module.exports = tokenRenew;
