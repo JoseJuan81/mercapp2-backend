@@ -30,7 +30,7 @@ const login = async ( req, res = response ) => {
             
         }
 
-        const token = await tokenGenerator( user.id, user.name );
+        const token = await tokenGenerator( user.id, user.name, user.email );
 
         return res.status( 200 ).json({
             ok: true,

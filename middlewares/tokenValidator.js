@@ -22,6 +22,7 @@ const validatorToken = ( req, res = response, next ) => {
 
         req.uid = user.uid;
         req.name = user.userName;
+        req.email = user.email;
 
     } catch (err) {
         console.log( 'error verificando token', err);

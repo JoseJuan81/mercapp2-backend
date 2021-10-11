@@ -4,7 +4,7 @@ const InsumosModel = require('../../models/Insumo');
 
 const getInsumo = async ( req, res = response ) => {
 
-    const { id } = req.params;
+    const { params: { id }, uid } = req;
 
     try {
 
@@ -16,7 +16,16 @@ const getInsumo = async ( req, res = response ) => {
                 ok: false,
                 msg: 'No existe el insumo con ese id'
             })
-    
+            
+        }
+        
+        if ( uid !== insumo.user ) {
+
+            return res.status( 404 ).json({
+                ok: false,
+                msg: 'Este insumo pertenece a otro usuario. No puede acceder a el'
+            })
+
         }
     
         return res.status( 200 ).json({
