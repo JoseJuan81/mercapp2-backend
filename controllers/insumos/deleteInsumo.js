@@ -7,7 +7,7 @@ const deleteInsumo = async ( req, res = response ) => {
     try {
 
         const { id } = req.params;
-        await InsumosModel.findByIdAndDelete( id );
+        await InsumosModel.findOneAndDelete({ '_id': id, 'user': req.uid });
     
         return res.status( 201 ).json({
             ok: true,
@@ -18,7 +18,7 @@ const deleteInsumo = async ( req, res = response ) => {
         console.log('Error al eliminar insumo', err)
         return res.status( 500 ).json({
             ok: false,
-            msg: 'Error al eliminar insumo'
+            msg: 'Error: id no existe o usuario no tiene permiso para eliminar'
         })
     }
 
