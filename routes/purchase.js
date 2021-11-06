@@ -24,9 +24,8 @@ const validatorToken = require('../middlewares/tokenValidator');
  router.get( '/', getAllPurchases );
  router.get( '/:id', getPurchase );
 
- router.post( '/', [
-     check('name', 'El nombre de la compra es requerida').notEmpty(),
-     check('establishment', 'El establecimiento es requerido').notEmpty(),
+ router.post( '/new', [
+     check('establishmentName', 'El establecimiento es requerido').notEmpty(),
      fieldsValidator
  ], createPurchase );
 

@@ -8,37 +8,20 @@ const getInsumo = async ( req, res = response ) => {
 
     try {
 
-        const insumo = await InsumosModel.findById( id ).populate( 'user', ['name', 'email'] );
-    
-        if ( !insumo ) {
-    
-            return res.status( 404 ).json({
-                ok: false,
-                msg: 'No existe el insumo con ese id'
-            })
-            
-        }
-        
-        if ( uid !== insumo.user ) {
+        const insumo = await InsumosModel.find({ '_id': id, 'user': uid }).populate( 'user', ['name', 'email'] );
 
-            return res.status( 404 ).json({
-                ok: false,
-                msg: 'Este insumo pertenece a otro usuario. No puede acceder a el'
-            })
-
-        }
-    
         return res.status( 200 ).json({
             ok: true,
             msg: 'obtener un insumo por id',
-            data: insumo
+            data: insumo[0]
         })
 
     } catch ( err ) {
         console.log('Error al obtener insumo por id', id)
-        return res.status( 400 ).json({
+        return res.status( 404 ).json({
             ok: false,
-            msg: 'Error al obtener el insumo con ese id'
+            msg: 'Error: id incorrecto o usuario no puede acceder a informacion',
+            data: undefined
         })
     }
 

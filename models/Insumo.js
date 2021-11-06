@@ -10,7 +10,6 @@ const InsumoSchema = mongoose.Schema({
         type: String,
         required: true,
         index: true,
-        unique: true
     },
     price: {},
     user: {

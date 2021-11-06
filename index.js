@@ -7,6 +7,7 @@ const mongoConnection = require('./db/config');
 const authRoutes = require('./routes/auth');
 const insumosRoutes = require('./routes/insumos');
 const purchaseRoutes = require('./routes/purchase');
+const establishmentRoutes = require('./routes/establishmentRoutes');
 
 const app = express();
 
@@ -27,6 +28,7 @@ app.use( express.json() );
 app.use( '/api/auth', authRoutes );
 app.use( '/api/insumos', insumosRoutes );
 app.use( '/api/purchases', purchaseRoutes );
+app.use( '/api/establishments', establishmentRoutes );
 
 const port = process.env.PORT;
 app.listen( port, () => {

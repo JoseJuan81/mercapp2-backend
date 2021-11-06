@@ -4,7 +4,9 @@ const InsumosModel = require('../../models/Insumo');
 
 const getAllInsumos = async ( req, res = response ) => {
 
-    const insumos = await InsumosModel.find({ user: req.uid }).populate( 'user', ['name', 'email'] );
+    const insumos = await InsumosModel
+                            .find({ user: req.uid })
+                            .sort({ name: 1 });
 
     return res.status( 200 ).json({
         ok: true,
