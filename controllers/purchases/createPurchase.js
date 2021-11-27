@@ -1,14 +1,39 @@
 const { response } = require('express');
 
+const Insumo = require('../../models/Insumo');
 const PurchaseModel = require('../../models/Purchase');
 
 const createPurchase = async ( req, res = response ) => {
 
     try {
 
-        const newPurchase = new PurchaseModel( req.body );
+        const { purchaseDate, ...rest } = req.body;
+        const newPurchase = new PurchaseModel({ ...rest, date: purchaseDate });
 
         newPurchase.user = req.uid;
+
+        const { insumos, establishmentName } = newPurchase;
+        const lowerName = establishmentName.toLowerCase();
+        const requests = [];
+
+        insumos.forEach( ({ id, price }) => {
+            const currentPrice = price[lowerName];
+            requests.push(
+                Insumo.updateOne(
+                    { _id: id },
+                    {
+                        price: { ...price, [lowerName]: currentPrice },
+                        $push: {
+                            historyPrice: { price: currentPrice, establishmentName: lowerName, date: purchaseDate }
+                        }
+                    })
+            )
+        })
+
+        Promise.all( requests )
+            .then( () => console.log('insumos actualizados al actualizar nueva compra') )
+            .catch( e => console.log('Error actualizando insumos desde neuva compra', e));
+
         const result = await newPurchase.save();
     
         return res.status( 201 ).json({

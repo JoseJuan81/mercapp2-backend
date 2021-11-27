@@ -16,6 +16,10 @@ const InsumoSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'users',
         required: true
+    },
+    historyPrice: {
+        type: Array,
+        default: []
     }
 }, { timestamps: true })
 
