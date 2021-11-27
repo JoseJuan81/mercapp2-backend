@@ -8,6 +8,9 @@ const PurchaseSchema = mongoose.Schema({
     closedDate: {
         type: Date
     },
+    date: {
+        type: Date
+    },
     establishmentName: {
         type: String,
         required: true,
@@ -16,6 +19,10 @@ const PurchaseSchema = mongoose.Schema({
     insumos: {
         type: Array,
         select: true
+    },
+    name: {
+        type: String,
+        default: ''
     },
     total: {
         type: Number,
