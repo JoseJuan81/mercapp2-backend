@@ -31,7 +31,6 @@ const createPurchase = async ( req, res = response ) => {
         })
 
         Promise.all( requests )
-            .then( () => console.log('insumos actualizados al actualizar nueva compra') )
             .catch( e => console.log('Error actualizando insumos desde neuva compra', e));
 
         const result = await newPurchase.save();

@@ -9,7 +9,7 @@ const getAllPurchases = async ( req, res = response ) => {
 
     return res.status( 200 ).json({
         ok: true,
-        msg: 'obtener todos las compras',
+        msg: 'obtener todas las compras',
         data: purchases
     })
 }
