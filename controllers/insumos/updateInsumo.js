@@ -6,15 +6,24 @@ const updateInsumo = async ( req, res = response ) => {
 
     try {
 
-        const { id } = req.params;
-
+        const { uid, params: { id } } = req;
+        
         const currentInsumo = await InsumosModel.findById( id );
-
+        
         if ( ! currentInsumo ) {
-
+            
             return res.status( 404 ).json({
                 ok: false,
                 msg: 'No existe el insumo con el id: ' + id
+            })
+            
+        }
+
+        if ( currentInsumo.user != uid ) {
+
+            return res.status( 404 ).json({
+                ok: false,
+                msg: 'Acceso no permitido'
             })
 
         }

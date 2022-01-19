@@ -6,12 +6,13 @@ const deleteInsumo = async ( req, res = response ) => {
 
     try {
 
-        const { id } = req.params;
-        await InsumosModel.findOneAndDelete({ '_id': id, 'user': req.uid });
+        const { params: { id }, uid } = req;
+        const response = await InsumosModel.findOneAndDelete({ '_id': id, 'user': uid });
     
         return res.status( 201 ).json({
             ok: true,
             msg: 'Insumo eliminado',
+            data: response
         })
 
     } catch ( err ) {

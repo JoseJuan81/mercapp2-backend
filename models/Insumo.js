@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 
 const InsumoSchema = mongoose.Schema({
+    isFavorite: {
+        type: Boolean,
+        default: false,
+    },
     labels: {
         type: Array,
         select: true,
