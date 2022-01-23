@@ -5,7 +5,7 @@ const PurchaseModel = require('../../models/Purchase');
 
 const getAllPurchases = async ( req, res = response ) => {
 
-    const purchases = await PurchaseModel.find({ user: req.uid }).sort({ createdAt: -1 });
+    const purchases = await PurchaseModel.find({ user: req.uid }).sort({ date: -1 });
 
     return res.status( 200 ).json({
         ok: true,

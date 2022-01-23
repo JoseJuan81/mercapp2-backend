@@ -1,5 +1,7 @@
 const { response } = require('express');
 
+const insertEstablishmentsLabels = require('../../helpers/insertEstablishmentsLabels');
+
 const InsumosModel = require('../../models/Insumo');
 
 const updateInsumo = async ( req, res = response ) => {
@@ -28,7 +30,9 @@ const updateInsumo = async ( req, res = response ) => {
 
         }
 
-       const insumoActualizado = await InsumosModel.findByIdAndUpdate( id, { ...req.body }, { new: true } );
+        const { price, labels } = req.body;
+        const uniqueLabels = insertEstablishmentsLabels( price, labels );
+        const insumoActualizado = await InsumosModel.findByIdAndUpdate( id, { ...req.body, labels: uniqueLabels }, { new: true } );
     
         return res.status( 201 ).json({
             ok: true,

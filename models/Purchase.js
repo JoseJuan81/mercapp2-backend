@@ -1,13 +1,6 @@
 const mongoose = require('mongoose');
 
 const PurchaseSchema = mongoose.Schema({
-    closed: {
-        type: Boolean,
-        default: false
-    },
-    closedDate: {
-        type: Date
-    },
     date: {
         type: Date
     },
