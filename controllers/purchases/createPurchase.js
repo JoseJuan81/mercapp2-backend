@@ -1,5 +1,7 @@
 const { response } = require('express');
 
+const insertEstablishmentsLabels = require('../../helpers/insertEstablishmentsLabels');
+
 const Insumo = require('../../models/Insumo');
 const PurchaseModel = require('../../models/Purchase');
 
@@ -16,13 +18,15 @@ const createPurchase = async ( req, res = response ) => {
         const lowerName = establishmentName.toLowerCase();
         const requests = [];
 
-        insumos.forEach( ({ id, price }) => {
+        insumos.forEach( ({ id, price, labels }) => {
+            const labelsUpdated = insertEstablishmentsLabels( price, labels );
             const currentPrice = price[lowerName];
             requests.push(
                 Insumo.updateOne(
                     { _id: id },
                     {
                         price: { ...price, [lowerName]: currentPrice },
+                        labels: [...labelsUpdated],
                         $push: {
                             historyPrice: { price: currentPrice, establishmentName: lowerName, date: purchaseDate }
                         }

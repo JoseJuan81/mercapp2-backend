@@ -1,5 +1,7 @@
 const { response } = require('express');
 
+const insertEstablishmentsLabels = require('../../helpers/insertEstablishmentsLabels');
+
 const InsumosModel = require('../../models/Insumo');
 
 const createInsumo = async ( req, res = response ) => {
@@ -17,6 +19,7 @@ const createInsumo = async ( req, res = response ) => {
 
         const newInsumo = new InsumosModel( req.body );
         newInsumo.user = req.uid;
+        newInsumo.labels = insertEstablishmentsLabels( newInsumo.price, newInsumo.labels );
         const result = await newInsumo.save();
     
         return res.status( 201 ).json({
