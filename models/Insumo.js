@@ -1,6 +1,16 @@
 const mongoose = require('mongoose');
 
 const InsumoSchema = mongoose.Schema({
+    category: {
+        type: String,
+        index: true,
+        select: true,
+        default: ''
+    },
+    image: {
+        type: String,
+        default: ''
+    },
     isFavorite: {
         type: Boolean,
         default: false,

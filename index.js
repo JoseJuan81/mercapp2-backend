@@ -8,6 +8,7 @@ const authRoutes = require('./routes/auth');
 const insumosRoutes = require('./routes/insumos');
 const purchaseRoutes = require('./routes/purchase');
 const establishmentRoutes = require('./routes/establishmentRoutes');
+const userRoute = require('./routes/userRoute');
 
 const app = express();
 
@@ -29,6 +30,7 @@ app.use( '/api/auth', authRoutes );
 app.use( '/api/insumos', insumosRoutes );
 app.use( '/api/purchases', purchaseRoutes );
 app.use( '/api/establishments', establishmentRoutes );
+app.use( '/api/user', userRoute );
 
 const port = process.env.PORT;
 app.listen( port, () => {
