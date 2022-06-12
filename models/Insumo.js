@@ -1,11 +1,13 @@
 const mongoose = require('mongoose');
 
+const categorySchema = require('./Schemas/Category');
+
 const InsumoSchema = mongoose.Schema({
     category: {
-        type: String,
+        type: categorySchema,
         index: true,
         select: true,
-        default: ''
+        default: { name: '', description: '' }
     },
     image: {
         type: String,
