@@ -1,11 +1,11 @@
 /**
- * @description Rutas de Establecimientos
- * urlBase: /api/establishment
+ * @description Rutas de Datos del usuario
+ * urlBase: /api/user
  */
 
 const { Router } = require('express');
 
-const getUserData = require('../controllers/user/getUserData');
+const updateUserData = require('../controllers/user/updateUserData');
 
 const validatorToken = require('../middlewares/tokenValidator');
 
@@ -13,6 +13,6 @@ const validatorToken = require('../middlewares/tokenValidator');
 
  router.use( validatorToken );
 
- router.get( '/data', getUserData );
+ router.put( '/', updateUserData );
  
  module.exports = router;

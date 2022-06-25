@@ -36,8 +36,7 @@ const login = async ( req, res = response ) => {
             ok: true,
             msg: 'Inicio de sesion exitoso',
             data: {
-                name: user.name,
-                email: user.email,
+                ...user.toJSON(),
                 uid: user.id,
                 token
             }

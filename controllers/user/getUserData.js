@@ -5,7 +5,7 @@ const UserModel = require('../../models/User');
 
 const getUserData = async ( req, res = response ) => {
 
-    const userData = await UserModel.find({ user: req.uid });
+    const userData = await UserModel.findById( req.uid );
 
     return res.status( 200 ).json({
         ok: true,
