@@ -1,13 +1,17 @@
 const mongoose = require('mongoose');
 
 const categorySchema = mongoose.Schema({
+    description: {
+        type: String
+    },
     name: {
         type: String,
         lowercase: true,
-        trim: true,
+        trim: true
     },
-    description: {
-        type: String
+    numberOfTimesUsed: {
+        type: Number,
+        default: 1
     }
 })
 

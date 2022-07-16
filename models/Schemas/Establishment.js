@@ -20,6 +20,10 @@ const EstablishmentSchema = mongoose.Schema({
         lowercase: true,
         trim: true, 
     },
+    numberOfTimesUsed: {
+        type: Number,
+        default: 1
+    }
 }, { timestamps: true })
 
 EstablishmentSchema.method('toJSON', function() {

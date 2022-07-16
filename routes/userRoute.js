@@ -9,10 +9,10 @@ const updateUserData = require('../controllers/user/updateUserData');
 
 const validatorToken = require('../middlewares/tokenValidator');
 
- const router = Router();
+const router = Router();
 
- router.use( validatorToken );
+router.use( validatorToken );
 
- router.put( '/', updateUserData );
- 
- module.exports = router;
+router.put( '/', updateUserData );
+
+module.exports = router;

@@ -11,9 +11,6 @@ const constant = {
         { name: "Verduras", decription: "hortalizas de color verda como los tallos y hojas: espinacas, lechugas, acelga, perejil, etc" },
         { name: "Hortalizas", decription: "plantas comestibles. Incluye raices, bulbos, hojas, semillas como tomates, cebollas, berenjenas, yuca, papas, zanahorias, etc" },
         { name: "Grasas y aceites", decription: "aceite de cocina, grasa de cerdo" },
-    ],
-    currency: [
-        { symbol: '', code: '' }
     ]
 }
 
