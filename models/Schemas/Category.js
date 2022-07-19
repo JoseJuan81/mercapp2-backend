@@ -15,6 +15,13 @@ const categorySchema = mongoose.Schema({
     }
 })
 
+categorySchema.add({
+    subCategory: {
+        type: [categorySchema],
+        dafault: []
+    }
+})
+
 categorySchema.method('toJSON', function() {
     const { __v, _id, ...rest } = this.toObject();
     rest.id = _id;

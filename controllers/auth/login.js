@@ -8,7 +8,7 @@ const login = async ( req, res = response ) => {
     
     try {
 
-        const user = await User.findOne({ email: req.body.email });
+        const user = await User.findOne({ email: req.body.email }).select('+password');
 
         if ( !user ) {
 
@@ -18,6 +18,7 @@ const login = async ( req, res = response ) => {
             })
 
         }
+
 
         const validPassword = bycript.compareSync( req.body.password, user.password );
 
@@ -29,14 +30,14 @@ const login = async ( req, res = response ) => {
             })
             
         }
-
         const token = await tokenGenerator( user.id, user.name, user.email );
+        const { password, ...rest } = user.toJSON()
 
         return res.status( 200 ).json({
             ok: true,
             msg: 'Inicio de sesion exitoso',
             data: {
-                ...user.toJSON(),
+                ...rest,
                 uid: user.id,
                 token
             }
