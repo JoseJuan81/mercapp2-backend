@@ -20,13 +20,12 @@ const createNewExpenseController = async ( req, res = response ) => {
         if ( !user ) {
             return UserNotExist( res ); 
         }
-    
         // Actualizar items
         updateItems({ incomingItems, user });
-
+        
         // Actualizar establishments
         updateEstablishments({ establishment, user });
-
+    
         // Actualizar category
         updateCategories({ category, user });
 
@@ -35,7 +34,7 @@ const createNewExpenseController = async ( req, res = response ) => {
         return res.status( 201 ).json({
             ok: true,
             msg: 'Gasto creado exitosamente',
-            data: user,
+            data: R.last(user.expenses),
         })
 
     } catch( err ) {
@@ -66,12 +65,15 @@ const updateEstablishments = ({ establishment, user }) => {
 }
 
 const updateCategories = ({ category, user }) => {
-    const categorytIndex = R.findIndex( R.propEq( 'name', R.toLower(category.name) ), user.categories );
+    const categorytIndex = R.findIndex(
+        el => R.toLower(category.name) === R.toLower( el.name ),
+        user.categories
+    );
 
     R.cond([
         [() => categorytIndex > -1, () => user.categories[categorytIndex].numberOfTimesUsed += 1],
-        [R.T, () => user.categories.push( category )]
-    ])()
+        [R.T, () => user.categories.push({ ...category, numberOfTimesUsed: 1 } )]
+    ])() 
 }
 
 const updateItems = ({ incomingItems, user }) => {

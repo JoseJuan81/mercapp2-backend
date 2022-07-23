@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 
 const CategorySchema = require('./Category');
 const EstablishmentSchema = require('./Establishment');
+const ItemSchema = require('./Item');
 
 const ExpenseSchema = mongoose.Schema({
 	amount: {
@@ -20,6 +21,10 @@ const ExpenseSchema = mongoose.Schema({
 	date: {
         type: Date,
 		required: [true, 'El campo "date" es requerido para crear un expense'],
+    },
+    items: {
+        type: [ItemSchema],
+        default: [],
     },
 }, { timestamps: true })
 
