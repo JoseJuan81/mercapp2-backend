@@ -22,7 +22,7 @@ const EstablishmentSchema = mongoose.Schema({
     },
     numberOfTimesUsed: {
         type: Number,
-        default: 1
+        default: 0
     }
 }, { timestamps: true })
 

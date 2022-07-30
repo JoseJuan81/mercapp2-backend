@@ -25,10 +25,10 @@ const createNewExpenseController = async ( req, res = response ) => {
         
         // Actualizar establishments
         updateEstablishments({ establishment, user });
-    
+
         // Actualizar category
         updateCategories({ category, user });
-
+      
         await user.save();
     
         return res.status( 201 ).json({
@@ -60,7 +60,7 @@ const updateEstablishments = ({ establishment, user }) => {
 
     R.cond([
         [() => establishmentIndex > -1, () => user.establishments[establishmentIndex].numberOfTimesUsed += 1],
-        [R.T, () => user.establishments.push( establishment )]
+        [R.T, () => user.establishments.push({ ...establishment, numberOfTimesUsed: 1 })]
     ])()
 }
 
