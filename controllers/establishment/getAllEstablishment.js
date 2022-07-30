@@ -5,14 +5,17 @@ const InsumosModel = require('../../models/Insumo');
 
 const getAllEstablishment = async ( req, res = response ) => {
 
-    const estabishments = await InsumosModel.aggregate([
+    /**
+     * @return type Array - [{establishment: "nombre"}]
+     */
+    const establishments = await InsumosModel.aggregate([
         // filtrar por usuario los insumos
         {
             $match: {
                 user: mongoose.Types.ObjectId( req.uid )
             }
         },
-        // agregar campo establishment y transformar de objeto a arreglo
+        // agregar campo establishment y transformar de objeto price a arreglo
         {
             $addFields: {
                 establishment: {
@@ -49,16 +52,17 @@ const getAllEstablishment = async ( req, res = response ) => {
         // eliminar campo _id
         {
             $set: {
-                establishments: '$_id', 
+                establishment: '$_id', 
                 _id: '$$REMOVE'
             }
         }
     ]);
 
+
     return res.status( 200 ).json({
         ok: true,
         msg: 'obtener todos los establecimientos de compra',
-        data: estabishments
+        data: establishments
     })
 }
 
