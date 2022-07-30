@@ -1,18 +1,12 @@
 const mongoose = require('mongoose');
 
 const CurrencySchema = mongoose.Schema({
-    name: {
-        type: String,
-        required: true,
-        lowercase: true,
-        trim: true,
-    },
     symbol: {
         type: String,
         required: true,
         trim: true
     },
-    isoCode: {
+    code: {
         type: String,
         uppercase: true,
         required: true,
