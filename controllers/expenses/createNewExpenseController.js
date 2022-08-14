@@ -24,10 +24,11 @@ const createNewExpenseController = async ( req, res = response ) => {
         updateItems({ incomingItems, user });
         
         // Actualizar establishments
-        updateEstablishments({ establishment, user });
+       updateEstablishments({ establishment, user });
 
         // Actualizar category
-        updateCategories({ category, user });
+         updateCategories({ category, user });
+
       
         await user.save();
     

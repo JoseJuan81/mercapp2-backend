@@ -14,6 +14,10 @@ const ExpenseSchema = mongoose.Schema({
         type: CategorySchema,
 		required: [true, 'El campo "category" es requerido para crear un expense'],
     },
+    description: {
+        type: String,
+        default: '',
+    },
 	establishment: {
 		type: EstablishmentSchema,
 		required: [true, 'El campo "establishment" es requerido para crear un expense'],
